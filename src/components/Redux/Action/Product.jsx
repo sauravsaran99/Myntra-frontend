@@ -8,7 +8,7 @@ export const Product = (payload) => {
 
 export const Productthunk = () => {
   return (dispatch) => {
-    axios.get("http://localhost:8080/product").then((res) => {
+    axios.get("https://fathomless-lowlands-62517.herokuapp.com/product").then((res) => {
       return dispatch(Product(res.data));
     });
   };

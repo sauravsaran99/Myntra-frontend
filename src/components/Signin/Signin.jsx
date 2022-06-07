@@ -1,14 +1,20 @@
 
 import { Navbar } from '../Navbar/Navbar'
 import  '../Signup/Signup.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 
 export const Signin = () => {
 
     const navigate = useNavigate();
+    const userid = sessionStorage.getItem('userId');
 
+    useEffect(() => {
+        if(userid) {
+            navigate('/')
+        }
+    }, [])
     const [errors, setErrors] = useState('')
     const [userData, setData] = useState({
         email: '',
@@ -23,10 +29,11 @@ export const Signin = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8080/signin', userData).then((res) => {
+        axios.post('https://fathomless-lowlands-62517.herokuapp.com/signin', userData).then((res) => {
         if(res.data.mess) {
-            console.log(res.data.mess)
             return setErrors(res.data.mess)
+        } else if(res.data.messa) {
+            return setErrors(res.data.messa)
         } else {
             console.log(res.data)
             sessionStorage.setItem('userId', res.data.id)
@@ -46,7 +53,7 @@ export const Signin = () => {
                 <form onSubmit={handleSubmit}>
                     <label id='inputlabel'>Email</label>
                     <br />
-                    <input 
+                    <input onClick={() => setErrors('')}
                     name='email'
                     value={userData.email}
                     onChange={(e) => handleChange(e)}
@@ -54,7 +61,7 @@ export const Signin = () => {
                     <br />
                     <label id='inputlabel'>Password</label>
                     <br />
-                    <input id='inputbox' 
+                    <input onClick={() => setErrors('')} id='inputbox' 
                     name='password'
                     value={userData.password}
                     onChange={(e) => handleChange(e)}
@@ -63,7 +70,7 @@ export const Signin = () => {
                     <label className='lastlabel'>By continuing, I agree to the <span className='red'>Terms of Use</span>&<span className='red'>Privacy 
                     <br></br>Policy</span></label>
                     <br />
-                    {errors !== ''?<h5>{errors}</h5>:''}
+                    {errors !== ''?<h5>*{errors}</h5>:''}
                     <button className="buttonsignup">Signin</button>
                     <label className='lastlabel'>Not  have account? <span className='red' onClick={() => navigate('/signup')}> 
                     Signup</span></label>

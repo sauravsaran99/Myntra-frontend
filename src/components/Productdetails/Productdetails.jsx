@@ -31,7 +31,7 @@ console.log("decart", cart)
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/product/${id}`)
+      .get(`https://fathomless-lowlands-62517.herokuapp.com/product/${id}`)
       .then((res) => {
         // console.log(res.data);
         dispatch(Cartthunk(idLo))
@@ -51,7 +51,7 @@ console.log("decart", cart)
     } else {
       if (selectSize.size !== "") {
         axios
-          .post(`http://localhost:8080/cart`, { ...data, ...selectSize})
+          .post(`https://fathomless-lowlands-62517.herokuapp.com/cart`, { ...data, ...selectSize})
           .then((res) => {
             // console.log('res', res.data);
             dispatch(Cartthunk(idLo))

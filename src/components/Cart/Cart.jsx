@@ -43,7 +43,7 @@ export const Cart  = () => {
     
 
     const patchFun = () => {
-        axios.patch(`http://localhost:8080/cart/${idup}`, updateQuan).then((res) => {
+        axios.patch(`https://fathomless-lowlands-62517.herokuapp.com/cart/${idup}`, updateQuan).then((res) => {
         })
 
         dispatch(Cartthunk(id));
@@ -65,7 +65,7 @@ export const Cart  = () => {
     }
 
     const deleteFun = (id) => {
-        axios.delete(`http://localhost:8080/cart/${id}`).then((res) => {
+        axios.delete(`https://fathomless-lowlands-62517.herokuapp.com/cart/${id}`).then((res) => {
             dispatch(Cartthunk(id));
             getId(id)
         // onQuanpage('quanpagedis');

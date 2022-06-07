@@ -4,6 +4,7 @@ import  './Signup.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { useEffect } from 'react';
 export const Signup = () => {
 
     const navigate = useNavigate();
@@ -14,6 +15,14 @@ export const Signup = () => {
     })
     const [errors, setErrors] = useState('')
 
+    const userid = sessionStorage.getItem('userId');
+
+    useEffect(() => {
+        if(userid) {
+            navigate('/')
+        }
+    }, [])
+
     const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -22,7 +31,7 @@ export const Signup = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8080/signup', userData).then((res) => {
+        axios.post('https://fathomless-lowlands-62517.herokuapp.com/signup', userData).then((res) => {
         if(res.data.errors) {
             console.log(res.data.errors[0].msg)
             return setErrors(res.data.errors[0].msg)

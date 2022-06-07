@@ -45,7 +45,7 @@ export const Address  = () => {
     const sendForm = (e) => {
         e.preventDefault();
         console.log(userAddress)
-        axios.post('http://localhost:8080/address', userAddress).then((res) => {
+        axios.post('https://fathomless-lowlands-62517.herokuapp.com/address', userAddress).then((res) => {
             console.log(res.data)
         }).catch((err) => {
             console.log('error', err)
@@ -61,13 +61,16 @@ export const Address  = () => {
             userid: userid
         })
 
-        axios.get('http://localhost:8080/address').then((res) => {
+        axios.get('https://fathomless-lowlands-62517.herokuapp.com/address').then((res) => {
+            res.data = res.data.filter((e) => {
+                return e.userid === userid
+            })
             getAdd(res.data)
         })
     }
 
     useEffect(() => {
-        axios.get('http://localhost:8080/address').then((res) => {
+        axios.get('https://fathomless-lowlands-62517.herokuapp.com/address').then((res) => {
             res.data = res.data.filter((e) => e.userid === userid)
             getAdd(res.data)
         })
