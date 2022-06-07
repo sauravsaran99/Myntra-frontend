@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../Productdetails/Productdetails.css";
 import { Second } from "../Product/Productsecond/Second/Second";
@@ -11,13 +11,18 @@ import { useSelector } from "react-redux";
 
 export const Productdetails = () => {
     const dispatch = useDispatch();
-    const cart = useSelector(store => store.cart.cart);
-
+    const cart = useSelector(store => store);
+    const idLo = sessionStorage.getItem("userId");
+    const navigate = useNavigate()
+console.log("decart", cart)
 
   const { id } = useParams();
+
+  console.log('mainid', id)
   const [selectSize, getSize] = useState({
     size: "",
     quantity: 1,
+    userid: idLo
   });
 
   const [addClass, setClass] = useState("sizechild");
@@ -26,10 +31,10 @@ export const Productdetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/data/${id}`)
+      .get(`http://localhost:8080/product/${id}`)
       .then((res) => {
         // console.log(res.data);
-        dispatch(Cartthunk())
+        dispatch(Cartthunk(idLo))
         getData(res.data);
       })
       .catch((err) => console.log(err.message));
@@ -40,17 +45,23 @@ export const Productdetails = () => {
   }, [cart]);
 
   const addCart = () => {
-    // console.log('s', selectSize)
-    if (selectSize.size !== "") {
-      axios
-        .post(`http://localhost:8080/cart`, { ...data, ...selectSize })
-        .then((res) => {
-          // console.log('res', res.data);
-          dispatch(Cartthunk())
-        });
+
+    if(!idLo) {
+      return navigate('/signin')
     } else {
-      setClass("redborder", );
+      if (selectSize.size !== "") {
+        axios
+          .post(`http://localhost:8080/cart`, { ...data, ...selectSize})
+          .then((res) => {
+            // console.log('res', res.data);
+            dispatch(Cartthunk(idLo))
+          });
+      } else {
+        setClass("redborder", );
+      }
     }
+    // console.log('s', selectSize)
+    
   };
 
   const changeSize = (e) => {
@@ -60,7 +71,7 @@ export const Productdetails = () => {
     setClass("sizechild");
   };
 
-  // console.log('cart', dataCart.length)
+  console.log('cart', cart)
   return (
     <>
     <Navbar cartcount={dataCart.length}></Navbar>

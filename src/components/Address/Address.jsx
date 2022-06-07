@@ -1,8 +1,9 @@
 
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import StripeCheckout from "react-stripe-checkout";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import '../Cart/Cart.css'
 import { Cartthunk } from "../Redux/Action/Cart";
@@ -14,7 +15,8 @@ export const Address  = () => {
     const dispatch = useDispatch();
     const cartData = useSelector(store => store.cart.cart);
     const [idup, getId] = useState(-1);
-
+    const userid = sessionStorage.getItem('userId');
+    
     const [quanPage, onQuanpage] = useState('quanpagedis')
     const [data, getCartData] = useState(cartData);
     const [updateQuan, sendUPd] = useState({
@@ -28,6 +30,7 @@ export const Address  = () => {
         town: '',
         city: '',
         state: '',
+        userid: userid,
     })
 
     const [add, getAdd] = useState([])
@@ -41,7 +44,12 @@ export const Address  = () => {
 
     const sendForm = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8080/address   ', userAddress)
+        console.log(userAddress)
+        axios.post('http://localhost:8080/address', userAddress).then((res) => {
+            console.log(res.data)
+        }).catch((err) => {
+            console.log('error', err)
+        })
         console.log('form', userAddress);
         setAddress({
             mobile:'',
@@ -50,6 +58,7 @@ export const Address  = () => {
             town: '',
             city: '',
             state: '',
+            userid: userid
         })
 
         axios.get('http://localhost:8080/address').then((res) => {
@@ -59,20 +68,22 @@ export const Address  = () => {
 
     useEffect(() => {
         axios.get('http://localhost:8080/address').then((res) => {
+            res.data = res.data.filter((e) => e.userid === userid)
             getAdd(res.data)
         })
     }, [])
 
     useEffect(() => {
-        dispatch(Cartthunk());
+        dispatch(Cartthunk(userid));
     }, [quanPage]);
 
     useEffect(() => {
         getCartData(cartData)
     }, [cartData]);
    
+    const navigate = useNavigate()
     
-
+console.log('saukr', data)
 
     const quantityFun = (id) => {
         getId(id);
@@ -84,7 +95,12 @@ export const Address  = () => {
         }
     }
 
-    console.log(add)
+    const handleToken = (token, addresses) => {
+        navigate("/thankyou");
+      };
+    
+
+    // console.log(add)
 
     let disPrice = 0;
     let mainPrice = 0;
@@ -177,9 +193,21 @@ export const Address  = () => {
     <div>₹{disPrice}</div>
 </div>
 
-<button className="placebutton">
+{/* <button >
     PLACE ORDER
-</button>
+</button> */}
+<div className="paywithcard">
+<StripeCheckout className="stripe"
+                stripeKey="pk_test_51KyudJSHhNNVrw8uK9p2vdN33CVg69y3bdz0GtyGRDMRwP57fi9aw4rRUJvZCWbxlCJLMlO6iXmkRu6iZ7Jb7IoT00cGBZ84iY"
+                token={handleToken}
+                billingAddress
+                shippingAddress
+              >
+            
+           
+              </StripeCheckout>
+
+</div>
             </div>
         </div>
         </div>

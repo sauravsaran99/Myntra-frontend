@@ -4,36 +4,35 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
-import { Cartthunk } from "../Redux/Action/Cart"
+import { Cartthunk } from "../Redux/Action/Cart";
+import { useNavigate } from "react-router-dom"
 
 export const Navbar = (props) => {
-
+console.log('props', props)
+    const navigate = useNavigate()
     // console.log('saur', props.cartcount)
     // const [onhov, setHov] = useState(false);
     
     // onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}
     // c
     const dispatch = useDispatch();
-    const cart = useSelector(store => store.cart.cart)
+    const cart = useSelector(store => store.cart.cart);
+    const idLo = sessionStorage.getItem("userId");
+    console.log('idlo', idLo)
     
-    // console.log('cart', cart)
-    const [count, setCount] = useState(props.cartcount);
+    console.log('cart', cart)
+    const [count, setCount] = useState(cart.length);
 
     useEffect(() => {
-        setCount(props.cartcount)
-    }, [props.cartcount]);
+        dispatch(Cartthunk(idLo));
+    }, [dispatch]);
 
-    useEffect(() => {
-        dispatch(Cartthunk());
-    }, [])
-
-
-
+    console.log('cartdat', cart)
     useEffect(() => {
         setCount(cart.length)
-    }, [cart])
+    }, [dispatch,cart]);
+
     
-    // console.log('count', count)
 
     return (
         <>
@@ -60,7 +59,7 @@ export const Navbar = (props) => {
             </div>
             <div className="forth">
                 <div className="forth-box">
-                    <span>
+                    <span onClick={() => navigate('/signin')}>
                         <img src="https://www.pikpng.com/pngl/m/5-52254_png-file-user-profile-icon-svg-clipart.png" alt="profile" width="20px" height="20px"/>
                     </span>
                     <span>Profile</span>

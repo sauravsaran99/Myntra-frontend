@@ -339,6 +339,12 @@
     font-weight: bold;
 }
 
+.paywithcard {
+    width: 157px;
+    margin: 10px auto;
+}
+
+
 /* input {
     width: 80%;
     height: 30px;

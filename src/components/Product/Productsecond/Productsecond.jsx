@@ -6,190 +6,38 @@ import { useDispatch } from "react-redux";
 import { Product } from "../../Redux/Action/Product";
 import { Productthunk } from "../../Redux/Action/Product";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 export const Productsecond = () => {
-  const { gender } = useParams();
-  const data = useSelector((store) => store);
   const dispatch = useDispatch();
-  const [modify, setModify] = useState([]);
-  const [radioVal, setReadio] = useState("");
-
+  const { gender } = useParams()
+  const [radio, setReadio] = useState('')
   useEffect(() => {
-    // console.log(radioVal);
-    if (radioVal === "Tshirts") {
-      const final = modify.filter(
-        (e) => e.productdec[e.productdec.length - 1] === "s"
-      );
-      dispatch(Product(final));
-    } else if (radioVal === "Puma") {
-      const final = modify.filter((e) => e.brand === "Puma");
-      dispatch(Product(final));
-    } else if (radioVal === "Roadster") {
-      const final = modify.filter((e) => e.brand === "Roadster");
-      dispatch(Product(final));
-    } else if (radioVal === "HRX by Hrithik Roshan") {
-      const final = modify.filter((e) => e.brand === "HRX by Hrithik Roshan");
-      dispatch(Product(final));
-    } else if (radioVal === "Nautica") {
-      const final = modify.filter((e) => e.brand === "Nautica");
-      dispatch(Product(final));
-    } else if (radioVal === "Levis") {
-      const final = modify.filter((e) => e.brand === "Levis");
-      dispatch(Product(final));
-    } else if (radioVal === "Nike") {
-      const final = modify.filter((e) => e.brand === "Nike");
-      dispatch(Product(final));
-    } else if (radioVal === "DILLINGER") {
-      const final = modify.filter((e) => e.brand === "DILLINGER");
-      dispatch(Product(final));
-    } else if (radioVal === "WROGN") {
-      const final = modify.filter((e) => e.brand === "WROGN");
-      dispatch(Product(final));
-    } else if (radioVal === "Ethnic basket") {
-      const final = modify.filter((e) => e.brand === "Ethnic basket");
-      dispatch(Product(final));
-    } else if (radioVal === "Sangria") {
-      const final = modify.filter((e) => e.brand === "Sangria");
-      dispatch(Product(final));
-    } else if (radioVal === "Anouk") {
-      const final = modify.filter((e) => e.brand === "Anouk");
-      dispatch(Product(final));
-    } else if (radioVal === "KALINI") {
-      const final = modify.filter((e) => e.brand === "KALINI");
-      dispatch(Product(final));
-    } else if (radioVal === "Indo Era") {
-      const final = modify.filter((e) => e.brand === "Indo Era");
-      dispatch(Product(final));
-    } else if (radioVal === "Varanga") {
-      const final = modify.filter((e) => e.brand === "Varanga");
-      dispatch(Product(final));
-    } else if (radioVal === "KAAJH") {
-      const final = modify.filter((e) => e.brand === "KAAJH");
-      dispatch(Product(final));
-    } else if (radioVal === "Fabindia") {
-      const final = modify.filter((e) => e.brand === "Fabindia");
-      dispatch(Product(final));
-    } else if (radioVal === "Kurtas") {
-      const final = modify.filter(
-        (e) => e.productdec[e.brand.length - 1] === "a"
-      );
-      dispatch(Product(final));
-    } else if (radioVal === "174") {
-    //   console.log(modify)
-      const final = modify.filter((e) => {
-        if (Number(e.dprice) >= Number(radioVal) && Number(e.dprice) <= 1631) {
-          return e;
-        }
-      });
-    //   console.log(final)
-      dispatch(Product(final));
-    } else if (radioVal === "1631") {
-    //   console.log(modify)
-      const final = modify.filter((e) => {
-        if (Number(e.dprice) >= Number(radioVal) && Number(e.dprice) <= 3088) {
-          return e;
-        }
-      });
-    //   console.log(final)
-      dispatch(Product(final));
-    } else if (radioVal === "3088") {
-    //   console.log(modify)
-      const final = modify.filter((e) => {
-        if (Number(e.dprice) >= Number(radioVal) && Number(e.dprice) <= 4545) {
-          return e;
-        }
-      });
-    //   console.log(final)
-      dispatch(Product(final));
-    } else if (radioVal === "4545") {
-    //   console.log(modify)
-      const final = modify.filter((e) => {
-        if (Number(e.dprice) >= Number(radioVal) && Number(e.dprice) <= 6002) {
-          return e;
-        }
-      });
-    //   console.log(final)
-      dispatch(Product(final));
-    } else if (radioVal === "10") {
-        // console.log(radioVal)
-        const final = modify.filter((e) => {
-          if (Number(e.dper) >= Number(radioVal) && Number(e.dper) <= 20) {
-            return e;
-          }
-        });
-        // console.log(final)
-        dispatch(Product(final));
-      }  else if (radioVal === "20") {
-        // console.log(radioVal)
-        const final = modify.filter((e) => {
-          if (Number(e.dper) >= Number(radioVal) && Number(e.dper) <= 30) {
-            return e;
-          }
-        });
-        // console.log(final)
-        dispatch(Product(final));
-      } else if (radioVal === "30") {
-        // console.log(radioVal)
-        const final = modify.filter((e) => {
-          if (Number(e.dper) >= Number(radioVal) && Number(e.dper) <= 40) {
-            return e;
-          }
-        });
-        // console.log(final)
-        dispatch(Product(final));
-      } else if (radioVal === "40") {
-        // console.log(radioVal)
-        const final = modify.filter((e) => {
-          if (Number(e.dper) >= Number(radioVal) && Number(e.dper) <= 50) {
-            return e;
-          }
-        });
-        // console.log(final)
-        dispatch(Product(final));
-      } else if (radioVal === "50") {
-        // console.log(radioVal)
-        const final = modify.filter((e) => {
-          if (Number(e.dper) >= Number(radioVal) && Number(e.dper) <= 60) {
-            return e;
-          }
-        });
-        // console.log(final)
-        dispatch(Product(final));
-      } else if (radioVal === "60") {
-        // console.log(radioVal)
-        const final = modify.filter((e) => {
-          if (Number(e.dper) >= Number(radioVal) && Number(e.dper) <= 70) {
-            return e;
-          }
-        });
-        // console.log(final)
-        dispatch(Product(final));
-      } else if (radioVal === "70") {
-        // console.log(radioVal)
-        const final = modify.filter((e) => {
-          if (Number(e.dper) >= Number(radioVal) && Number(e.dper) <= 80) {
-            return e;
-          }
-        });
-        // console.log(final)
-        dispatch(Product(final));
-      } else if (radioVal === "80") {
-        // console.log(radioVal)
-        const final = modify.filter((e) => {
-          if (Number(e.dper) >= Number(radioVal)) {
-            return e;
-          }
-        });
-        // console.log(final)
-        dispatch(Product(final));
-      } else {
-      dispatch(Productthunk());
+    console.log(typeof(radio))
+    if(radio[0] == 'P'|| radio[0] == 'R' || radio[0] == 'W' || radio[0] == 'N' || radio[0] == 'H' || radio[0] == 'D' || radio[0] == 'L' || radio[0] == 'A' || radio[0] == 'E' || radio[0] == 'S' || radio[0] == 'K' || radio[0] == 'I' || radio[0] == 'K' || radio[0] == 'V' || radio[0] == 'F') {
+      console.log('bradn')
+      axios.get(`http://localhost:8080/product?category=${gender=='men'?'mentshirts':'womenkurti'}&brand=${radio}`).then((res) => {
+      dispatch(Product(res.data))
+    })
+    } else {
+      if(radio == 174) {
+        axios.get(`http://localhost:8080/product?min=${radio}&max=1631`).then((res) => {
+          dispatch(Product(res.data))
+        })
+      } else if(radio == 1631) {
+        axios.get(`http://localhost:8080/product?min=${radio}&max=3088`).then((res) => {
+          dispatch(Product(res.data))
+        })
+      } else if(radio == 3088) {
+        axios.get(`http://localhost:8080/product?min=${radio}&max=4545`).then((res) => {
+          dispatch(Product(res.data))
+        })
+      }  else if(radio == 4545) {
+        axios.get(`http://localhost:8080/product?min=${radio}&max=6002`).then((res) => {
+          dispatch(Product(res.data))
+        })
+      }
     }
-  }, [radioVal]);
-
-  useEffect(() => {
-    setModify([...data.product.pdata]);
-  }, [data]);
-  console.log("data", data.product.pdata);
+  }, [radio])
   return (
     <>
       {gender === "men" ? (
@@ -202,19 +50,19 @@ export const Productsecond = () => {
                 type="radio"
                 id="html"
                 name="fav_language"
-                value="Tshirts"
+                value="Tshirts" checked="checked"
               />
               <label for="Tshirts">Tshirts</label>
-              <br />
+              {/* <br />
               <input
                 type="radio"
                 id="Lounge Tshirts"
                 name="fav_language"
                 value="Lounge Tshirts"
-                onClick={(e) => setReadio(e.target.value)}
-              />
-              <label for="Lounge Tshirts">Lounge Tshirts</label>
-              <br />
+                onClick={(e) => setReadio(e.target.value)}  
+              /> */}
+              {/* <label for="Lounge Tshirts">Lounge Tshirts</label>
+              <br /> */}
             </div>
             <div className="brand">
               <h4>BRAND</h4>
@@ -506,7 +354,7 @@ export const Productsecond = () => {
               <input
                 type="radio"
                 name="fav_language"
-                value="174"
+                value={174}
                 onClick={(e) => setReadio(e.target.value)}
               />
               <label for="174">Rs. 174 to Rs. 1631</label>
@@ -515,7 +363,7 @@ export const Productsecond = () => {
                 type="radio"
                 id="1631"
                 name="fav_language"
-                value="1631"
+                value={1631}
                 onClick={(e) => setReadio(e.target.value)}
               />
               <label for="1631">Rs. 1631 to Rs. 3088</label>
@@ -523,7 +371,7 @@ export const Productsecond = () => {
               <input
                 type="radio"
                 name="fav_language"
-                value="3088"
+                value={3088}
                 onClick={(e) => setReadio(e.target.value)}
               />
               <label for="3088">Rs. 3088 to Rs. 4545</label>
@@ -532,7 +380,7 @@ export const Productsecond = () => {
                 type="radio"
                 id="4545"
                 name="fav_language"
-                value="4545"
+                value={4545}
                 onClick={(e) => setReadio(e.target.value)}
               />
               <label for="4545">Rs. 4545 to Rs. 6002</label>

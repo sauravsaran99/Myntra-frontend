@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { Productthunk } from "../../../Redux/Action/Product";
+// import { useDispatch } from "react-redux";
+// import { Productthunk } from "../../../Redux/Action/Product";
 import { Link, useParams } from "react-router-dom";
-
 export const Second = () => {
   const { gender } = useParams();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const data = useSelector((Store) => Store.product.pdata);
   const [products, getProducts] = useState([]);
   const [cate, setCate] = useState("");
-  useEffect(() => {
-    dispatch(Productthunk());
-  }, [dispatch]);
-
+  // useEffect(() => {
+  //   dispatch(Productthunk());
+  // }, [dispatch]);
+// console.log('sau', data)
   useEffect(() => {
     getProducts([...data]);
   }, [data]);
@@ -35,7 +34,7 @@ export const Second = () => {
             
           if (e.imgsrc !== "" && e.category === cate && e.dprice) {
             return (
-<Link to={`/product/${gender}/${e.id}`}>
+<Link to={`/product/${gender}/${e._id}`}>
               <div className="uibox">
                 <div className="uiboximg">
                   <img

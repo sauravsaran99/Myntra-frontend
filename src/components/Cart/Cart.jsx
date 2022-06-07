@@ -8,9 +8,19 @@ import '../Cart/Cart.css'
 import { Cartthunk } from "../Redux/Action/Cart";
 import { Second } from "../Product/Productsecond/Second/Second";
 import axios from "axios";
+import  {useNavigate} from "react-router-dom";
 
 export const Cart  = () => {
     
+    const navigate = useNavigate()
+    const id = sessionStorage.getItem('userId')
+    
+    useEffect(() => {
+        if(!id) {
+            return navigate('/signin')
+        }
+    }, [])
+
     const dispatch = useDispatch();
     const cartData = useSelector(store => store.cart.cart);
     const [idup, getId] = useState(-1);
@@ -19,32 +29,33 @@ export const Cart  = () => {
     const [data, getCartData] = useState(cartData);
     const [updateQuan, sendUPd] = useState({
         quantity: null,
-        
     })
-    useEffect(() => {
-        dispatch(Cartthunk());
-    }, [quanPage]);
 
     useEffect(() => {
+        dispatch(Cartthunk(id));
+    }, [quanPage, idup]);
+
+    useEffect(() => {
+        console.log('cart', cartData)
         getCartData(cartData)
-    }, [cartData]);
+    }, [cartData, quanPage, idup]);
    
     
 
     const patchFun = () => {
-        console.log(updateQuan)
         axios.patch(`http://localhost:8080/cart/${idup}`, updateQuan).then((res) => {
-            console.log(res.data)
         })
 
-        dispatch(Cartthunk());
-        onQuanpage('quanpagedis');
+        dispatch(Cartthunk(id));
+        if(quanPage === 'quanpagedis') {
+            onQuanpage('quanPage')
+        } else {
+            onQuanpage('quanpagedis')
+        }
     }
 
     const quantityFun = (id) => {
         getId(id);
-
-        console.log('id', id);
 
         if(quanPage === 'quanpagedis') {
             onQuanpage('quanPage')
@@ -55,9 +66,9 @@ export const Cart  = () => {
 
     const deleteFun = (id) => {
         axios.delete(`http://localhost:8080/cart/${id}`).then((res) => {
-            console.log(res.data);
-            dispatch(Cartthunk());
-        onQuanpage('quanpagedis');
+            dispatch(Cartthunk(id));
+            getId(id)
+        // onQuanpage('quanpagedis');
         })
     }
 
@@ -68,7 +79,9 @@ export const Cart  = () => {
         disPrice += data[i].dprice*data[i].quantity;
         mainPrice += data[i].strike*data[i].quantity;
     }
-    console.log(disPrice, mainPrice)
+
+
+    console.log('data',cartData)
     return (
         <>
         <div className="cartpage">
@@ -105,8 +118,8 @@ export const Cart  = () => {
                                 <h3>{e.brand}</h3>
                                 <div>{e.productdec}</div>
                                 <div>Size: { e.size}</div>
-                                <button className="remove" onClick={() => quantityFun(e.id)}>Qty: { e.quantity}</button>
-                                <button className="remove" onClick={() => deleteFun(e.id)}>Remove</button>
+                                <button className="remove" onClick={() => quantityFun(e._id)}>Qty: { e.quantity}</button>
+                                <button className="remove" onClick={() => deleteFun(e._id)}>Remove</button>
                                 <div><span>Rs.{e.dprice} </span><span><s>Rs.{e.strike} </s></span> <span> {e.dper}%OFF</span>
                             </div>
                             </div>
