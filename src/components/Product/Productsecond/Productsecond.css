@@ -12,6 +12,14 @@
     top: 0;
 }
 
+.uibox {
+    border-radius: 3px;
+}
+
+.textpadding {
+    padding: 2px 10px;
+}
+
 .productsecondsecond {
     flex: .8;
     /* background-color: royalblue; */
@@ -23,7 +31,8 @@
 
 .uibox {
     width: 95%;
-    height: 95%;
+    /* height: 95%; */
+    height: 440px;
     overflow: hidden;
     background-color: #fff;
 }

@@ -44,11 +44,12 @@ export const Second = () => {
                     height="10%"
                   />
                 </div>
-                <div>{e.brand}</div>
-                <div>{e.productdec}</div>
-                <div>₹ {e.dprice}</div>
-                <div>₹ {e.strike}</div>
-                <div>{e.dper}</div>
+                <div className="textpadding">{e.brand}</div>
+                <div className="textpadding">{e.productdec}</div>
+                <div className="textpadding">₹ {e.dprice}</div>
+                <div className="textpadding"><s>₹ {e.strike}</s></div>
+                {/* <div className="textpadding">
+                  {e.dper}</div> */}
               </div>
               </Link>
             );
