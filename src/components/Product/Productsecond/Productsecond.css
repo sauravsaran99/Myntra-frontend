@@ -29,10 +29,11 @@
     padding: 20px;
 }
 
+
 .uibox {
     width: 95%;
     /* height: 95%; */
-    height: 440px;
+    /* height: 440px; */
     overflow: hidden;
     background-color: #fff;
 }
@@ -59,13 +60,13 @@ h4 {
 }
 
 .brand {
-    height: 240px;
+    /* height: 240px; */
     border-bottom: .5px solid rgb(169, 162, 162);
     padding-left: 22px;
 }
 
 .price {
-    height: 190px;
+    /* height: 190px; */
     border-bottom: .5px solid rgb(220, 215, 215);
     padding-left: 22px;
 }
@@ -93,3 +94,4 @@ label {
     box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
     border-radius: 5px;
 }
+

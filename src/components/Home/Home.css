@@ -80,6 +80,14 @@
     .slider {
     height: 22vh;
 }
+
+.second {
+    justify-content: space-around;
+}
+
+.first img {
+    width: 52px;
+}
 }
 
 @media screen and (min-width: 491px) and (max-width: 621px) {

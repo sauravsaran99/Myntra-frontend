@@ -176,6 +176,25 @@ s {
         grid-template-columns: repeat(3, 1fr);
     }
 
+    .quanPage {
+        transform: translate(-50%,-50%);
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        }
+    
+        .quanPage {
+            width: 290px;
+        }
+    
+        .donemain {
+            width: 221px;
+        }
+    
+        .diffquantiy {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
     .firstimgss {
         margin-bottom: 30px;
     }
@@ -187,6 +206,33 @@ s {
     }
 
     .productsecondsecond {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .bundlescounty {
+        display: none;
+    }
+
+    .cartmiddle {
+        display: none;
+    }
+
+    .quanPage {
+    transform: translate(-50%,-50%);
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    }
+
+    .quanPage {
+        width: 290px;
+    }
+
+    .donemain {
+        width: 221px;
+    }
+
+    .diffquantiy {
         grid-template-columns: repeat(2, 1fr);
     }
 
