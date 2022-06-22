@@ -42,7 +42,7 @@ console.log('props', props)
                 <img src="https://im.indiatimes.in/content/2021/Jan/4a985efe47b423013443845a31f48dce_60154982add11.jpg?w=725&h=543" alt="logo" width="35%" height="50%"/></Link>
             </div>
             <div className="second">
-                <ul>
+                <ul className="mobileres">
                     <Link to='/product/men'><li >MEN</li></Link>
                     <Link to='/product/women'><li >WOMEN</li></Link>
                     <li className="disable2">KIDS</li>
